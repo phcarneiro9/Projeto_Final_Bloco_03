@@ -226,7 +226,7 @@ Adicione ao `.gitignore`:
 ## 💻 Principais Rotas
 
 | Rota | Descrição |
-|---|---|
+| --- | --- |
 | `/home` | Página inicial |
 | `/produtos` | Lista de produtos |
 | `/produtos/cadastrar` | Cadastro de produto |
@@ -240,8 +240,6 @@ Adicione ao `.gitignore`:
 
 ---
 
-</div>
-
 ## 👨‍💻 Autor
 
 **Patrick Carneiro**  
@@ -249,12 +247,4 @@ Full Stack Java Developer | Sistemas de Informação
 
 [GitHub](https://github.com/phcarneiro9) • [LinkedIn](https://www.linkedin.com/in/phcarneiro9/)
 
-</div>
-
 ---
-
-<div align="center">
-
-Desenvolvido com React + Spring Boot 💙
-
-</div>
