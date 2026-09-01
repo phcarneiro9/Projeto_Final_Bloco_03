@@ -1,122 +1,110 @@
-# Farmácia React — Front-end de Produtos por Categoria
+# 💊 Farmácia React
 
-Projeto front-end em React + Vite + Tailwind CSS para gerenciar Produtos
-classificados por Categoria, consumindo um backend em deploy documentado via
-Swagger.
+<div align="center">
 
-## Stack
+Aplicação Front-end desenvolvida com **React + Vite + Tailwind CSS** para gerenciamento de categorias de produtos, integrada a uma API REST desenvolvida em Spring Boot.
 
-- React 18 + Vite
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-HTTP-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+
+</div>
+
+---
+
+## 📌 Sobre
+
+O **Farmácia React** é o Front-end do projeto Farmácia, desenvolvido para consumir uma API REST e realizar o gerenciamento de **Categorias**, utilizando uma interface moderna e responsiva.
+
+A aplicação também possui os modelos **Categoria** e **Produto**, mantendo o relacionamento definido pelo backend.
+
+## ⚙️ Funcionalidades
+
+- Home, Navbar e Footer
+- Listagem de categorias
+- Cadastro de categorias
+- Edição de categorias
+- Exclusão de categorias
+- Integração com API REST
+- Navegação com React Router
+- Layout responsivo com Tailwind CSS
+
+## 💻 Tecnologias
+
+- React 18
+- Vite
+- JavaScript
 - Tailwind CSS
 - React Router DOM
 - Axios
+- Git e GitHub
 
-## 1. Abrir no VS Code e configurar o projeto
+## 📋 CRUD de Categorias
+
+| Operação | Método |
+|---|---|
+| Listar | `GET` |
+| Cadastrar | `POST` |
+| Atualizar | `PUT` |
+| Excluir | `DELETE` |
+
+## 🔗 Rotas
+
+| Rota | Página |
+|---|---|
+| `/` | Home |
+| `/categorias` | Categorias |
+| `/categorias/cadastrar` | Nova Categoria |
+| `/categorias/editar/:id` | Editar Categoria |
+
+## 🌿 Branches
+
+O desenvolvimento foi organizado nas seguintes branches:
+
+- `Home-navbar-footer`
+- `CRUD-categoria`
+- `rotas-conclusao-do-projeto`
+
+## 🚀 Executando o Projeto
 
 ```bash
-# dentro da pasta do projeto
+git clone https://github.com/phcarneiro9/Farmacia_React.git
+cd Farmacia_React
 npm install
 npm run dev
 ```
 
-O Vite sobe o servidor em `http://localhost:5173`.
+A aplicação será executada em:
 
-> Como este ambiente não tem acesso à internet, o `node_modules` não foi
-> instalado aqui. Rode `npm install` na sua máquina/VS Code assim que abrir o
-> projeto.
-
-## 2. Apontar para o backend (Swagger em deploy)
-
-Abra `src/services/Service.js` e troque a `baseURL` pela URL do backend que
-você está testando no Swagger, por exemplo:
-
-```js
-const api = axios.create({
-  baseURL: 'https://sua-api-farmacia.onrender.com',
-})
+```text
+http://localhost:5173
 ```
 
-Confira no Swagger os nomes exatos dos endpoints (`/categorias`,
-`/produtos`, etc.) e ajuste `CategoriaService.js` / `ProdutoService.js` se o
-backend usar nomes diferentes.
+## 🌐 Backend
 
-## 3. Estrutura do projeto
+API desenvolvida com **Java + Spring Boot** e integrada ao Front-end através do Axios.
 
-```
-src/
-  components/   -> NavBar, Footer
-  pages/        -> Home, Categoria (listar/form), Produto (a implementar)
-  models/       -> Categoria.js, Produto.js
-  services/     -> Service.js (Axios genérico), CategoriaService.js, ProdutoService.js
-  router/       -> AppRoutes.jsx
+```text
+https://projeto-final-bloco-02-bjdi.onrender.com
 ```
 
-## 4. Criar o repositório no GitHub
+## 👨‍💻 Autor
 
-```bash
-git init
-git add .
-git commit -m "chore: setup inicial do projeto React + Tailwind"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/farmacia-react.git
-git push -u origin main
-```
+<div align="center">
 
-## 5. Etapa 1 — Home, NavBar e Footer
+**Patrick Carneiro**
 
-Já implementados em `components/NavBar.jsx`, `components/Footer.jsx` e
-`pages/Home.jsx`, usando Flexbox (`flex`, `justify-between`, `items-center`)
-e Grid (`grid grid-cols-1 md:grid-cols-3`) do Tailwind. Teste o alinhamento
-redimensionando a janela do navegador (mobile/tablet/desktop).
+Full Stack Java Developer | Sistemas de Informação
 
-Envie esta etapa em uma branch dedicada:
+[GitHub](https://github.com/phcarneiro9) • [LinkedIn](https://www.linkedin.com/in/phcarneiro9/)
 
-```bash
-git checkout -b Home-navbar-footer
-git add .
-git commit -m "feat: componentes Home, NavBar e Footer com Tailwind"
-git push -u origin Home-navbar-footer
-```
+</div>
 
-## 6. Etapa 2 — CRUD de Categoria
+---
 
-Já implementado em `pages/Categoria/ListarCategoria.jsx` (GetAll e Delete) e
-`pages/Categoria/FormCategoria.jsx` (Post e Put), usando os hooks
-`useState`/`useEffect` e o Axios configurado em `services/`.
+<div align="center">
 
-Teste cada operação com o backend em deploy rodando (crie, edite, liste e
-exclua uma categoria pela interface).
+Desenvolvido com React + Spring Boot 💙
 
-```bash
-git checkout -b CRUD-categoria
-git add .
-git commit -m "feat: CRUD completo de Categoria (GetAll, Post, Put, Delete)"
-git push -u origin CRUD-categoria
-```
-
-## 7. Etapa 3 — Rotas e conclusão
-
-As rotas já estão configuradas em `router/AppRoutes.jsx`:
-
-| Rota                        | Página            |
-|------------------------------|-------------------|
-| `/`                          | Home              |
-| `/categorias`                | Listar categorias |
-| `/categorias/cadastrar`      | Nova categoria    |
-| `/categorias/editar/:id`     | Editar categoria  |
-
-Se o exercício também pedir o CRUD de Produto, siga o mesmo padrão de
-`Categoria` dentro de `pages/Produto/`, reaproveitando `ProdutoService.js` e
-o modelo `Produto.js` (que já referencia `categoria`).
-
-```bash
-git checkout -b rotas-conclusao-do-projeto
-git add .
-git commit -m "feat: rotas do React Router e conclusão do projeto"
-git push -u origin rotas-conclusao-do-projeto
-```
-
-## 8. Entrega na Plataforma da Generation
-
-Após cada push, copie o link do repositório (ou da branch específica, se
-solicitado) e envie na atividade correspondente dentro do prazo indicado.
+</div>
