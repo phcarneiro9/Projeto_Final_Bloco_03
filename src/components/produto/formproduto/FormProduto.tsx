@@ -78,15 +78,28 @@ export default function FormProduto() {
     setIsLoading(true);
 
     try {
-      const dados = {
-        ...produto,
-        id: id ? Number(id) : 0,
+      const dadosProduto = {
+        nome: produto.nome,
+        descricao: produto.descricao,
+        preco: produto.preco,
+        quantidade: produto.quantidade,
+        foto: produto.foto,
+        categoria: {
+          id: produto.categoria.id,
+        },
       };
 
       if (id) {
-        await atualizar('/produtos', dados, setProduto);
+        await atualizar(
+          '/produtos',
+          {
+            id: Number(id),
+            ...dadosProduto,
+          },
+          setProduto
+        );
       } else {
-        await cadastrar('/produtos', dados, setProduto);
+        await cadastrar('/produtos', dadosProduto, setProduto);
       }
 
       alert(
@@ -94,7 +107,9 @@ export default function FormProduto() {
       );
 
       navigate('/produtos');
-    } catch {
+    } catch (error) {
+      console.error('Erro ao salvar produto:', error);
+
       alert(
         'Não foi possível salvar o produto. Verifique os dados e a API.'
       );
@@ -121,7 +136,6 @@ export default function FormProduto() {
         </h1>
 
         <div className="mt-7 grid gap-5">
-
           <label className="grid gap-2 text-sm font-semibold text-slate-700">
             Nome
 
@@ -234,11 +248,9 @@ export default function FormProduto() {
               ))}
             </select>
           </label>
-
         </div>
 
         <div className="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-
           <button
             type="button"
             onClick={() => navigate('/produtos')}
@@ -260,7 +272,6 @@ export default function FormProduto() {
               'Cadastrar'
             )}
           </button>
-
         </div>
       </form>
     </main>
