@@ -86,7 +86,7 @@ http://localhost:5173
 API desenvolvida com **Java + Spring Boot** e integrada ao Front-end através do Axios.
 
 ```text
-https://projeto-final-bloco-02-bjdi.onrender.com
+https://projeto-final-bloco-03-9i7e.onrender.com
 ```
 
 ## 👨‍💻 Autor
@@ -99,12 +99,3 @@ Full Stack Java Developer | Sistemas de Informação
 
 [GitHub](https://github.com/phcarneiro9) • [LinkedIn](https://www.linkedin.com/in/phcarneiro9/)
 
-</div>
-
----
-
-<div align="center">
-
-Desenvolvido com React + Spring Boot 💙
-
-</div>
