@@ -55,11 +55,31 @@ npm run dev
 
 Para validar a build:
 
-```bash
-npm run build
+```text
+http://localhost:5173
+```
+
+## 🌐 Backend
+
+API desenvolvida com **Java + Spring Boot** e integrada ao Front-end através do Axios.
+
+```text
+https://projeto-final-bloco-02-bjdi.onrender.com
 ```
 
 ## 👨‍💻 Autor
 
 **Patrick Carneiro**  
 Full Stack Java Developer | Sistemas de Informação
+
+[GitHub](https://github.com/phcarneiro9) • [LinkedIn](https://www.linkedin.com/in/phcarneiro9/)
+
+</div>
+
+---
+
+<div align="center">
+
+Desenvolvido com React + Spring Boot 💙
+
+</div>
