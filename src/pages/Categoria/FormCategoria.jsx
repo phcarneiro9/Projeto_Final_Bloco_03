@@ -1,91 +1,136 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
+  atualizarCategoria,
   buscarCategoriaPorId,
   criarCategoria,
-  atualizarCategoria,
-} from '../../services/CategoriaService'
+} from "../../services/CategoriaService";
 
 function FormCategoria() {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const emEdicao = Boolean(id)
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  const [categoria, setCategoria] = useState({ descricao: '' })
-  const [salvando, setSalvando] = useState(false)
-  const [erro, setErro] = useState('')
+  const [categoria, setCategoria] = useState({
+    id: 0,
+    tipo: "",
+    descricao: "",
+  });
+
+  const [erro, setErro] = useState("");
 
   useEffect(() => {
-    if (emEdicao) {
-      buscarCategoriaPorId(id).then(setCategoria)
+    if (id) {
+      buscarCategoriaPorId(id)
+        .then((response) => {
+          setCategoria(response.data);
+        })
+        .catch(() => {
+          setErro("Não foi possível carregar a categoria.");
+        });
     }
-  }, [id, emEdicao])
+  }, [id]);
 
-  function handleChange(evento) {
-    const { name, value } = evento.target
-    setCategoria((prev) => ({ ...prev, [name]: value }))
+  function atualizarEstado(event) {
+    setCategoria({
+      ...categoria,
+      [event.target.name]: event.target.value,
+    });
   }
 
-  async function handleSubmit(evento) {
-    evento.preventDefault()
-    setSalvando(true)
-    setErro('')
+  async function salvarCategoria(event) {
+    event.preventDefault();
+    setErro("");
 
     try {
-      if (emEdicao) {
-        await atualizarCategoria({ ...categoria, id: Number(id) })
+      if (id) {
+        await atualizarCategoria(categoria);
       } else {
-        await criarCategoria(categoria)
+        await criarCategoria({
+          tipo: categoria.tipo,
+          descricao: categoria.descricao,
+        });
       }
-      navigate('/categorias')
+
+      navigate("/categorias");
     } catch (error) {
-      setErro('Não foi possível salvar a categoria. Tente novamente.')
-    } finally {
-      setSalvando(false)
+      console.error(error);
+      setErro("Não foi possível salvar a categoria. Tente novamente.");
     }
   }
 
   return (
-    <main className="mx-auto max-w-xl px-6 py-10">
-      <h1 className="mb-6 text-2xl font-bold text-gray-800">
-        {emEdicao ? 'Editar categoria' : 'Nova categoria'}
+    <div className="max-w-3xl mx-auto px-6 py-10">
+      <h1 className="text-3xl font-bold text-slate-800 mb-8">
+        {id ? "Editar categoria" : "Nova categoria"}
       </h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-gray-700">Descrição</span>
+      <form onSubmit={salvarCategoria} className="space-y-6">
+
+        <div>
+          <label
+            htmlFor="tipo"
+            className="block text-lg text-slate-700 mb-2"
+          >
+            Tipo
+          </label>
+
           <input
+            id="tipo"
+            name="tipo"
             type="text"
-            name="descricao"
-            value={categoria.descricao}
-            onChange={handleChange}
+            value={categoria.tipo}
+            onChange={atualizarEstado}
+            placeholder="Ex: Medicamentos"
             required
-            className="rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600"
-            placeholder="Ex: Analgésicos"
+            minLength={3}
+            maxLength={100}
+            className="w-full border border-slate-300 rounded-lg px-4 py-3"
           />
-        </label>
+        </div>
 
-        {erro && <p className="text-sm text-red-600">{erro}</p>}
+        <div>
+          <label
+            htmlFor="descricao"
+            className="block text-lg text-slate-700 mb-2"
+          >
+            Descrição
+          </label>
 
-        <div className="mt-2 flex gap-3">
+          <input
+            id="descricao"
+            name="descricao"
+            type="text"
+            value={categoria.descricao}
+            onChange={atualizarEstado}
+            placeholder="Ex: Analgésicos e anti-inflamatórios"
+            required
+            minLength={5}
+            maxLength={255}
+            className="w-full border border-slate-300 rounded-lg px-4 py-3"
+          />
+        </div>
+
+        {erro && <p className="text-red-600">{erro}</p>}
+
+        <div className="flex gap-4">
           <button
             type="submit"
-            disabled={salvando}
-            className="rounded-md bg-primary-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-700 disabled:opacity-60"
+            className="bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-700"
           >
-            {salvando ? 'Salvando...' : 'Salvar'}
+            Salvar
           </button>
+
           <button
             type="button"
-            onClick={() => navigate('/categorias')}
-            className="rounded-md border border-gray-300 px-5 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+            onClick={() => navigate("/categorias")}
+            className="border border-slate-300 px-6 py-3 rounded-lg"
           >
             Cancelar
           </button>
         </div>
       </form>
-    </main>
-  )
+    </div>
+  );
 }
 
-export default FormCategoria
+export default FormCategoria;
