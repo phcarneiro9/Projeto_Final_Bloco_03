@@ -66,3 +66,5 @@ Praticar **React, TypeScript, consumo de APIs REST, CRUD, componentização, rot
 **Patrick Carneiro**
 
 [GitHub](https://github.com/phcarneiro9)
+
+<!-- README refresh -->
